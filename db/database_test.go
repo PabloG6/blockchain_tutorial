@@ -4,6 +4,8 @@ import (
 	"bytes"
 
 	"testing"
+
+	"github.com/PabloG6/blockchain-tutorial/config"
 )
 
 func TestNewDatabase(test *testing.T) {
@@ -11,7 +13,8 @@ func TestNewDatabase(test *testing.T) {
 		
 		
 	
-		db, err := New(test.TempDir())
+		config := config.Config{FileName: test.TempDir()}
+		db, err := New(config)
 		if err != nil {
 			t.Fatalf(`error %v`, err)
 

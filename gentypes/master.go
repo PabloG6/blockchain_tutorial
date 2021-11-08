@@ -1,6 +1,10 @@
 package gentypes
 
-import "github.com/PabloG6/blockchain-tutorial/crypto"
+import (
+	"encoding/hex"
+
+	"github.com/PabloG6/blockchain-tutorial/crypto"
+)
 
 /*
 	the master seed is responsible for seeding the network,
@@ -19,7 +23,8 @@ type MasterNetwork struct {
 
 func NewMaster()(*MasterNetwork) {
 	
-	return &MasterNetwork{Address: crypto.GenerateAddress(), Tokens: make([]Token, 0)}
+	privKey, _ := crypto.GenerateKey();
+	return &MasterNetwork{Address: hex.EncodeToString(privKey), Tokens: make([]Token, 0)}
 	
 }
 
