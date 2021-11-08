@@ -11,9 +11,9 @@ import (
 
 //generates a new database option
 func New(config config.Config) (*ticketdb.Database, error) {
-	db, err :=  ticketdb.New(config.FileName)
+	db, err :=  ticketdb.New(config.DirName)
 	if err != nil {
-		log.Fatalf("failed to create new db with filename: %s error: %v", config.FileName, err)
+		log.Fatalf("failed to create new db with filename: %s error: %v", config.DirName, err)
 	}
 	return db, nil;
 }

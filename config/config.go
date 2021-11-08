@@ -10,7 +10,7 @@ import (
 
 
 type Config struct {
-	FileName string
+	DirName string
 }
 
 func LoadConfig(configFile string) (config Config) {

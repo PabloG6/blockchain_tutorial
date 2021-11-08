@@ -2,10 +2,12 @@ package db
 
 import (
 	"bytes"
+	"os"
 
 	"testing"
 
 	"github.com/PabloG6/blockchain-tutorial/config"
+	"github.com/pelletier/go-toml"
 )
 
 func TestNewDatabase(test *testing.T) {
@@ -13,7 +15,7 @@ func TestNewDatabase(test *testing.T) {
 		
 		
 	
-		config := config.Config{FileName: test.TempDir()}
+		config := config.Config{DirName: test.TempDir()}
 		db, err := New(config)
 		if err != nil {
 			t.Fatalf(`error %v`, err)
@@ -41,7 +43,33 @@ func TestNewDatabase(test *testing.T) {
 	})
 	
 	//todo separate tests for cleaner reading.
-	test.Run("Put information in database", func(t *testing.T) {})
+	test.Run("New Database with test.toml file", func(t *testing.T) {
+		
+		config := config.Config{}
+		data, err := os.ReadFile("../test.toml");
+
+		if err != nil {
+			t.Fatal(err);
+		}
+
+
+		err = toml.Unmarshal(data, &config)
+		if err != nil {
+			t.Fatal(err);
+		}
+
+
+		db, err := New(config)
+		if err != nil {
+			t.Fatalf(`error %v`, err)
+
+		}
+
+		t.Cleanup(func ()  {
+			os.RemoveAll(config.DirName)
+			db.Close();
+		})
+	})
 
 }
 
