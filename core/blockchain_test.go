@@ -11,7 +11,8 @@ func TestBlockChainSeed(test *testing.T) {
 
 		
 		bc := NewBlockChain()
-		masterNode := bc.Seed();
+		config := Config{fn: t.TempDir()}
+		masterNode := bc.Seed(config);
 		masterNodeData, err := bc.db.Get([]byte(masterNode.Address));
 		t.Logf("masterNodeData: %s", string(masterNodeData))
 		if err != nil {

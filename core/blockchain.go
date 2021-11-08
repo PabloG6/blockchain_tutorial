@@ -15,10 +15,14 @@ type BlockChain struct {
 	genesisBlock *gentypes.GenesisBlock
 }
 
+type Config struct {
+	fn string //location of the file or where it should be stored.
+}
+
 
 
 //start ur own chain by seeding a block.
-func (bc *BlockChain) Seed() (*gentypes.MasterNetwork) {
+func (bc *BlockChain) Seed(config Config) (*gentypes.MasterNetwork) {
 
 	// masterSeed := &gentypes.MasterNetwork{}
 	masterNode := gentypes.NewMaster();
