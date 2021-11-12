@@ -3,6 +3,7 @@ package gentypes
 import (
 	"encoding/hex"
 
+	"github.com/PabloG6/blockchain-tutorial/config"
 	"github.com/PabloG6/blockchain-tutorial/crypto"
 )
 
@@ -15,7 +16,6 @@ type MasterNetwork struct {
 	Address string;
 	Tokens []Token;
 	 
-
 }
 
 
@@ -23,8 +23,9 @@ type MasterNetwork struct {
 
 func NewMaster()(*MasterNetwork) {
 	
+	
 	privKey, _ := crypto.GenerateKey();
-	return &MasterNetwork{Address: hex.EncodeToString(privKey), Tokens: make([]Token, 0)}
+	return &MasterNetwork{Address: hex.EncodeToString(privKey), Tokens: make([]Token, config.GlobalConfig.TokenSupply)}
 	
 }
 

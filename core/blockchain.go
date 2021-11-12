@@ -2,8 +2,10 @@ package core
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 
+	"github.com/PabloG6/blockchain-tutorial/config"
 	"github.com/PabloG6/blockchain-tutorial/db"
 	"github.com/PabloG6/blockchain-tutorial/db/leveldb"
 	"github.com/PabloG6/blockchain-tutorial/gentypes"
@@ -15,14 +17,11 @@ type BlockChain struct {
 	genesisBlock *gentypes.GenesisBlock
 }
 
-type Config struct {
-	fn string //location of the file or where it should be stored.
-}
 
 
 
 //start ur own chain by seeding a block.
-func (bc *BlockChain) Seed(config Config) (*gentypes.MasterNetwork) {
+func (bc *BlockChain) Seed() (*gentypes.MasterNetwork) {
 
 	// masterSeed := &gentypes.MasterNetwork{}
 	masterNode := gentypes.NewMaster();
@@ -42,12 +41,14 @@ func (bc *BlockChain) Seed(config Config) (*gentypes.MasterNetwork) {
 
 
 func NewBlockChain() (*BlockChain) {
-	db, _ := db.New("test_1");
+	fmt.Println(config.GlobalConfig.DirName)
+	db, _ := db.New(config.GlobalConfig);
 	return &BlockChain{
 		db: db,
 		
 	}
 }
+
 func (bc *BlockChain) Connect() {
 
 	//load and connect to the existing chain by connecting and seeding info from a master node.

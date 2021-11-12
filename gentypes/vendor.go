@@ -1,6 +1,9 @@
-package gentypes;
+package gentypes
+
+
 
 type Vendor struct {
-	accountId string;
-	accountType string;
+	accountId   string
+	accountType string
+
 }
